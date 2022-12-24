@@ -20,7 +20,7 @@ const generatePicture = () => {
         id: 1,
         url: `./photos/${getRandomInt(1, 25)}.jpg`,
         description: "фотографии природы",
-        likse: 200,
+        likes: getRandomInt(1, 1000),
         comments: [
             generateComment(),
             generateComment(),
