@@ -1,18 +1,28 @@
+const previewModalElement = document.querySelector('.big-picture');
+const previewModalCloseElement = document.querySelector('.big-picture__cancel');
 const picturesListElement = document.querySelector('.pictures');
+const pictureTemplateElement = document.getElementById('picture')
+    .content
+    .querySelector('.picture');
 
 const renderPicturesList = (pictures) => {
     for (const picture of pictures) {
-        const html = `
-            <a href="#" class="picture">
-                <img class="picture__img" src="${picture.url}" width="182" height="182" alt="Случайная фотография">
-                <p class="picture__info">
-                    <span class="picture__comments"></span>
-                    <span class="picture__likes"></span>
-                </p>
-            </a>`;
+        const pictureElement = pictureTemplateElement.cloneNode(true);
 
-        picturesListElement.insertAdjacentHTML('beforeend', html);
+        pictureElement.querySelector('img').src = picture.url;
+        pictureElement.querySelector('.picture__likes').textContent = picture.likes;
+        pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
+
+        picturesListElement.append(pictureElement);
+
+        pictureElement.addEventListener('click', function () {
+            previewModalElement.classList.remove('hidden');
+        });
     }
+
+    previewModalCloseElement.addEventListener('click', function () {
+        previewModalElement.classList.add('hidden');
+    });
 };
 
 export {renderPicturesList};
