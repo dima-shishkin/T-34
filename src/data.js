@@ -14,15 +14,19 @@ const generateComment = () => {
         }
     };
 }
-
+const descriptions = [
+    "Крутая фотка",
+    "Прикольная фотка",
+    "Какой кошмар",
+    "Нормально",
+];
 const generatePicture = () => {
     return {
-        id: 1,
+        id: getRandomInt(1, 1000),
         url: `./photos/${getRandomInt(1, 25)}.jpg`,
-        description: "фотографии природы",
+        description: descriptions[getRandomInt(0, descriptions.length - 1)],
         likes: getRandomInt(1, 1000),
         comments: [
-            generateComment(),
             generateComment(),
             generateComment(),
         ],
