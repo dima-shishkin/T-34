@@ -12,10 +12,18 @@ const renderPicturesList = (pictures) => {
         pictureElement.querySelector('img').src = picture.url;
         pictureElement.querySelector('.picture__likes').textContent = picture.likes;
         pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
+        pictureElement.dataset.id = picture.id;
 
         picturesListElement.append(pictureElement);
 
         pictureElement.addEventListener('click', function () {
+            const id = Number(pictureElement.dataset.id);
+            const picture = pictures.find((pic) => pic.id === id);
+
+            document.querySelector('.big-picture__img img').src = picture.url;
+            document.querySelector(".social__caption").textContent = picture.description;
+            document.querySelector(".comments-count").textContent = picture.comments.length;
+
             previewModalElement.classList.remove('hidden');
         });
     }
@@ -26,3 +34,4 @@ const renderPicturesList = (pictures) => {
 };
 
 export {renderPicturesList};
+
