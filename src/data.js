@@ -19,6 +19,8 @@ const descriptions = [
     "Прикольная фотка",
     "Какой кошмар",
     "Нормально",
+    "Лучшая фотка",
+    "Когда начался конец света",
 ];
 const generatePicture = () => {
     return {
@@ -27,6 +29,7 @@ const generatePicture = () => {
         description: descriptions[getRandomInt(0, descriptions.length - 1)],
         likes: getRandomInt(1, 1000),
         comments: [
+            generateComment(),
             generateComment(),
             generateComment(),
         ],
