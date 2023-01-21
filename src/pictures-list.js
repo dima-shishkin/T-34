@@ -1,9 +1,27 @@
 const previewModalElement = document.querySelector('.big-picture');
 const previewModalCloseElement = document.querySelector('.big-picture__cancel');
 const picturesListElement = document.querySelector('.pictures');
+const commentsListElement = document.querySelector(".social__comments");
+
+const commentTemplateElement = document.getElementById("comment")
+    .content
+    .querySelector(".social__comment");
+
 const pictureTemplateElement = document.getElementById('picture')
     .content
     .querySelector('.picture');
+
+const renderCommentsList = (comments) => {
+    commentsListElement.innerHTML = "";
+
+    for (const comment of comments) {
+        const commentElement = commentTemplateElement.cloneNode(true);
+        commentElement.querySelector(".social__text").textContent = comment.message;
+        commentElement.querySelector(".social__picture").src = comment.user.avatar;
+        
+        commentsListElement.append(commentElement);
+    }
+}
 
 const renderPicturesList = (pictures) => {
     for (const picture of pictures) {
@@ -24,6 +42,8 @@ const renderPicturesList = (pictures) => {
             document.querySelector(".social__caption").textContent = picture.description;
             document.querySelector(".comments-count").textContent = picture.comments.length;
 
+            renderCommentsList(picture.comments);
+
             previewModalElement.classList.remove('hidden');
         });
     }
@@ -34,4 +54,3 @@ const renderPicturesList = (pictures) => {
 };
 
 export {renderPicturesList};
-
