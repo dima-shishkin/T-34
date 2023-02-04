@@ -14,5 +14,11 @@ smaller.addEventListener('click', function (evt) {
     }
 });
 
-bigger.addEventListener('click', function () {
+bigger.addEventListener('click', function (evt) {
+    evt.stopPropagation();
+    if (scale < 100) {
+        scale = scale + 25;
+        preview.style.transform  = `scale(${scale / 100})`;
+        control.value = scale + '%';
+    }
 });
