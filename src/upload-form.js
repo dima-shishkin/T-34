@@ -1,3 +1,5 @@
+const uploadFormEffectsElement = document.querySelector(".img-upload__preview img");
+const uploadEffectWrapper = document.querySelector(".img-upload__effect-level");
 const uploadFormElement = document.querySelector(".img-upload__overlay");
 const filename = document.querySelector(".img-upload__input");
 const photo = document.querySelector(".img-upload__preview  img");
@@ -28,6 +30,8 @@ filename.addEventListener("change", function () {
 
 uploadFormCloseElement.addEventListener('click', function () {
     uploadFormElement.classList.add('hidden');
+    uploadEffectWrapper.classList.add('hidden');
+    uploadFormEffectsElement.className = `effects__preview--none`;
 });
 
 comment1.addEventListener('input', function () {
