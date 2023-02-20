@@ -17,12 +17,23 @@ effects.addEventListener('click', function (evt) {
 
 noUiSlider.create(uploadEffect, {
     range: {
-        min: 0,
-        max: 100
+        "min": 0,
+        "max": 1
     },
-    start: 100,
-    stop: 1, 
+    start: 1,
+    stop: 0.1, 
     connect: 'lower',
+   //format: {
+   //    to: function (value) {
+   //        if (Numder.isInteger(value)) {
+   //            return value.toFixed(0);
+   //        }
+   //        return value.toFixed(1);
+   //    },
+   //    from: function (value) {
+   //        return parseFloat(value);
+   //    }
+   //}
 });
 
 const onSliderUpdate = (_, handle, unencoded) => {
