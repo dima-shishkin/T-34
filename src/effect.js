@@ -5,10 +5,52 @@ const uploadEffectWrapper = document.querySelector(".img-upload__effect-level");
 
 effects.addEventListener('click', function (evt) {
     if (evt.target.matches(".effects__radio")) {
-        console.log(evt.target.value);
         uploadFormEffectsElement.className = `effects__preview--${evt.target.value}`;
+
         if (evt.target.value === "none") {
+            uploadFormEffectsElement.style.filter = 'unset';
             uploadEffectWrapper.classList.add('hidden');
+
+        } else if (evt.target.value === "chrome") {
+            uploadEffect.noUiSlider.updateOptions({
+                range: {min: 0, max: 1},
+                step: 0.1
+            });
+            uploadEffect.noUiSlider.set(1);
+            uploadEffectWrapper.classList.remove('hidden');
+
+        } else if (evt.target.value === "sepia") {
+            uploadEffect.noUiSlider.updateOptions({
+                range: {min: 0, max: 1},
+                step: 1
+            });
+            uploadEffect.noUiSlider.set(1);
+            uploadEffectWrapper.classList.remove('hidden');
+
+        } else if (evt.target.value === "marvin") {
+            uploadEffect.noUiSlider.updateOptions({
+                range: {min: 0, max: 100},
+                step: 1
+            });
+            uploadEffect.noUiSlider.set(100);
+            uploadEffectWrapper.classList.remove('hidden');
+
+        } else if (evt.target.value === "marvin") {
+            uploadEffect.noUiSlider.updateOptions({
+                range: {min: 0, max: 100},
+                step: 1
+            });
+            uploadEffect.noUiSlider.set(100);
+            uploadEffectWrapper.classList.remove('hidden');
+            
+        } else if (evt.target.value === "marvin") {
+            uploadEffect.noUiSlider.updateOptions({
+                range: {min: 0, max: 100},
+                step: 1
+            });
+            uploadEffect.noUiSlider.set(100);
+            uploadEffectWrapper.classList.remove('hidden');
+
         } else {
             uploadEffectWrapper.classList.remove('hidden');
         }
@@ -21,22 +63,30 @@ noUiSlider.create(uploadEffect, {
         "max": 1
     },
     start: 1,
-    stop: 0.1, 
+    step: 0.1, 
     connect: 'lower',
-   //format: {
-   //    to: function (value) {
-   //        if (Numder.isInteger(value)) {
-   //            return value.toFixed(0);
-   //        }
-   //        return value.toFixed(1);
-   //    },
-   //    from: function (value) {
-   //        return parseFloat(value);
-   //    }
-   //}
+    format: {
+        to: function (value) {
+            if (Number.isInteger(value)) {
+                return value.toFixed(0);
+            }
+            return value.toFixed(1);
+        },
+        from: function (value) {
+            return parseFloat(value);
+        }
+    }
 });
 
 const onSliderUpdate = (_, handle, unencoded) => {
-    console.log(unencoded[handle]);
+    const effect = document.querySelector('.effects__radio:checked').id.split('-')[1];
+
+    if (effect === "chrome") {
+        uploadFormEffectsElement.style.filter = `grayscale(${unencoded[handle]})`;
+    } else if (effect === "sepia") {
+        uploadFormEffectsElement.style.filter = `sepia(${unencoded[handle]})`;
+    }else if (effect === "marvin") {
+        uploadFormEffectsElement.style.filter = `invert(${unencoded[handle]}%)`;
+    }
 };
 uploadEffect.noUiSlider.on("update", onSliderUpdate);
