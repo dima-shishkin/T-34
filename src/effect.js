@@ -35,20 +35,20 @@ effects.addEventListener('click', function (evt) {
             uploadEffect.noUiSlider.set(100);
             uploadEffectWrapper.classList.remove('hidden');
 
-        } else if (evt.target.value === "marvin") {
+        } else if (evt.target.value === "phobos") {
             uploadEffect.noUiSlider.updateOptions({
-                range: {min: 0, max: 100},
-                step: 1
+                range: {min: 0, max: 3},
+                step: 0.1
             });
-            uploadEffect.noUiSlider.set(100);
+            uploadEffect.noUiSlider.set(3);
             uploadEffectWrapper.classList.remove('hidden');
-            
-        } else if (evt.target.value === "marvin") {
+
+        } else if (evt.target.value === "heat") {
             uploadEffect.noUiSlider.updateOptions({
-                range: {min: 0, max: 100},
-                step: 1
+                range: {min: 1, max: 3},
+                step: 0.1
             });
-            uploadEffect.noUiSlider.set(100);
+            uploadEffect.noUiSlider.set(3);
             uploadEffectWrapper.classList.remove('hidden');
 
         } else {
@@ -87,6 +87,10 @@ const onSliderUpdate = (_, handle, unencoded) => {
         uploadFormEffectsElement.style.filter = `sepia(${unencoded[handle]})`;
     }else if (effect === "marvin") {
         uploadFormEffectsElement.style.filter = `invert(${unencoded[handle]}%)`;
+    }else if (effect === "phobos") {
+        uploadFormEffectsElement.style.filter = `blur(${unencoded[handle]}px)`;
+    }else if (effect === "heat") {
+        uploadFormEffectsElement.style.filter = `brightness(${unencoded[handle]})`;
     }
 };
 uploadEffect.noUiSlider.on("update", onSliderUpdate);
