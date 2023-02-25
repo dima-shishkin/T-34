@@ -22,7 +22,7 @@ effects.addEventListener('click', function (evt) {
         } else if (evt.target.value === "sepia") {
             uploadEffect.noUiSlider.updateOptions({
                 range: {min: 0, max: 1},
-                step: 1
+                step: 0.1
             });
             uploadEffect.noUiSlider.set(1);
             uploadEffectWrapper.classList.remove('hidden');
