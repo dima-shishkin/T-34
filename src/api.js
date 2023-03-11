@@ -1,10 +1,11 @@
-function sendData() {
-    const xhr = new HMLHttpRequest();
-    xhr.open('POST', 'http://localhost:80/pictures');
+function sendData(url, body) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
     xhr.addEventListener('load', function () {
         if (xhr.status === 201) {
             console.log(1);
         }
     });
-    xhr.send();
+    xhr.send(body);
 }
+export {sendData};
