@@ -2,6 +2,12 @@ const previewModalElement = document.querySelector('.big-picture');
 const commentsListElement = document.querySelector(".social__comments");
 const previewModalCloseElement = document.querySelector('.big-picture__cancel');
 
+const onPopupEscKeydown = (evt) => {
+    if (evt.code === "Escape") {
+        closePreviewModal()
+    };
+}
+
 const commentTemplateElement = document.getElementById("comment")
     .content
     .querySelector(".social__comment");
@@ -25,7 +31,7 @@ const renderPicturePreview = (pictureElement, pictures) => {
     document.querySelector('.big-picture__img img').src = picture.url;
     document.querySelector(".social__caption").textContent = picture.description;
     document.querySelector(".comments-count").textContent = picture.comments.length;
-    
+
     renderCommentsList(picture.comments);
 };
 
@@ -33,17 +39,13 @@ const openPreviewModal = (pictureElement, pictures) => {
     renderPicturePreview(pictureElement, pictures);
     previewModalElement.classList.remove('hidden');
     previewModalCloseElement.addEventListener('click', closePreviewModal);
+    document.addEventListener("keydown", onPopupEscKeydown);
 };
 
 const closePreviewModal = () => {
     previewModalElement.classList.add('hidden');
     previewModalCloseElement.removeEventListener('click', closePreviewModal);
+    document.removeEventListener("keydown", onPopupEscKeydown);
 };
-
-document.addEventListener("keydown", (evt) => {
-    if (evt.code === "Escape") {
-        closePreviewModal()
-    };
-});
 
 export {openPreviewModal, closePreviewModal};

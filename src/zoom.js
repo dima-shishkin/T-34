@@ -22,3 +22,5 @@ bigger.addEventListener('click', function (evt) {
         control.value = scale + '%';
     }
 });
+
+export {};
