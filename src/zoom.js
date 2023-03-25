@@ -5,22 +5,22 @@ const bigger = document.querySelector(".scale__control--bigger");
 
 let scale = 100;
 
-smaller.addEventListener('click', function (evt) {
+const zoomOut = (evt) => {
     evt.stopPropagation();
     if (scale > 25) {
         scale = scale - 25;
         preview.style.transform  = `scale(${scale / 100})`;
         control.value = scale + '%';
     }
-});
-
-bigger.addEventListener('click', function (evt) {
+}
+const zoomIn = (evt) => {
     evt.stopPropagation();
     if (scale < 100) {
         scale = scale + 25;
         preview.style.transform  = `scale(${scale / 100})`;
         control.value = scale + '%';
     }
-});
+}
 
-export {};
+export {zoomOut};
+export {zoomIn};

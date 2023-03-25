@@ -1,3 +1,6 @@
+import {zoomOut} from "./zoom";
+import {zoomIn} from "./zoom";
+
 const uploadFormEffectsElement = document.querySelector(".img-upload__preview img");
 const uploadEffectWrapper = document.querySelector(".img-upload__effect-level");
 const uploadFormElement = document.querySelector(".img-upload__overlay");
@@ -25,7 +28,8 @@ const openUploadModal = () => {
     renderUploadPreview(fileInputElement.files[0]);
     uploadFormElement.classList.remove('hidden');
     uploadFormCloseElement.addEventListener('click', closeUploadModal);
-    
+//    zoomIn.addEventListener('click', function () {} );
+//    zoomOut.addEventListener('click', function () {} );
 }
 
 const closeUploadModal = () => {
