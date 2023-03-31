@@ -1,4 +1,4 @@
-import { openPreviewModal } from "./preview-modal";
+import {openPreviewModal} from "./preview-modal";
 
 const picturesListElement = document.querySelector('.pictures');
 const pictureTemplateElement = document.getElementById('picture')
