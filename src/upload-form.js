@@ -9,3 +9,9 @@
 // comment2.addEventListener('input', function () {
 //     console.log(comment2.value);
 // });
+
+const setUploadFormSubmit = (onSuccess, onFail) => {
+
+}
+
+export {setUploadFormSubmit};

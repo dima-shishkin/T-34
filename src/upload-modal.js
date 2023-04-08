@@ -1,9 +1,9 @@
 import {onZoomInClick, onZoomOutClick} from "./zoom";
+import {renderUploadPreview} from "./upload-preview"
 import {onSliderUpdate, onEffectsRadioChange} from "./effect";
 
-const effects = document.querySelectorAll(".effects__preview");
 const effectListElement = document.querySelector(".effects__list");
-const fileInputElement = document.querySelector(".img-upload__input");
+const uploadModalOpenElement = document.querySelector(".img-upload__input");
 const sliderElement = document.querySelector(".effect-level__slider");
 const uploadFormElement = document.querySelector(".img-upload__overlay");
 const uploadFormCloseElement = document.querySelector(".img-upload__cancel");
@@ -12,21 +12,8 @@ const zoonInButtonElement = document.querySelector(".scale__control--bigger");
 const zoomOutButtonElement = document.querySelector(".scale__control--smaller");
 const uploadEffectWrapper = document.querySelector(".img-upload__effect-level");
 
-const renderUploadPreview = (file) => {
-    const reader = new FileReader();
-
-    reader.addEventListener("load", function () {
-        previewImgElement.src = reader.result;
-        effects.forEach((effect) => {
-            effect.style.backgroundImage = `url(${reader.result})`;
-        });
-    });
-    
-    reader.readAsDataURL(file);
-}
-
-const openUploadModal = () => {
-    renderUploadPreview(fileInputElement.files[0]);
+const openUploadModal = (file) => {
+    renderUploadPreview(file);
     uploadFormElement.classList.remove('hidden');
 
     uploadFormCloseElement.addEventListener('click', closeUploadModal);
@@ -48,4 +35,10 @@ const closeUploadModal = () => {
     sliderElement.noUiSlider.off('update');
 }
 
-export {openUploadModal};
+if (uploadModalOpenElement) {
+    uploadModalOpenElement.addEventListener("change", () => {
+        openUploadModal(uploadModalOpenElement.files[0]);
+    });
+}
+
+export {closeUploadModal};

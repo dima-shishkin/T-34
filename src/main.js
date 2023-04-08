@@ -1,10 +1,16 @@
 import {generatePictures} from "./data.js";
 import {renderPicturesList} from "./pictures-list.js";
-import {openUploadModal} from "./upload-modal.js";
-import "./comment-form";
+import {closeUploadModal} from "./upload-modal.js";
+import {setCommentFormSubmit} from "./comment-form.js";
+import {setUploadFormSubmit} from "./upload-form.js";
 //import "./api";
 
-const fileInputElement = document.querySelector(".img-upload__input");
-
 renderPicturesList(generatePictures());
-fileInputElement.addEventListener("change", openUploadModal);
+setCommentFormSubmit();
+
+setUploadFormSubmit(
+    function () {},
+    function () {
+        closeUploadModal();
+    },
+);
