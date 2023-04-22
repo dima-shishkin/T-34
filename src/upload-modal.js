@@ -3,9 +3,9 @@ import {renderUploadPreview} from "./upload-preview"
 import {onSliderUpdate, onEffectsRadioChange} from "./effect";
 
 const effectListElement = document.querySelector(".effects__list");
-const uploadModalOpenElement = document.querySelector(".img-upload__input");
 const sliderElement = document.querySelector(".effect-level__slider");
 const uploadFormElement = document.querySelector(".img-upload__overlay");
+const uploadModalOpenElement = document.querySelector(".img-upload__input");
 const uploadFormCloseElement = document.querySelector(".img-upload__cancel");
 const previewImgElement = document.querySelector(".img-upload__preview  img");
 const zoonInButtonElement = document.querySelector(".scale__control--bigger");

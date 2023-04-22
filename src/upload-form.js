@@ -1,17 +1,26 @@
-// const comment1 = document.querySelector(".text__hashtags");
-// const comment2 = document.querySelector(".text__description");
+const uploadFormElement = document.querySelector(".img-upload__form");
+const submitButtonElement = uploadFormElement.querySelector(".img-upload__submit");
 
+const blockSubmitButton = () => {
+    submitButtonElement.disabled = true;
+    submitButtonElement.innerHTML = "Публикация...";
+}
 
-// comment1.addEventListener('input', function () {
-//     console.log(comment1.value);
-// });
-
-// comment2.addEventListener('input', function () {
-//     console.log(comment2.value);
-// });
+const unblockSubmitButton = () => {
+    submitButtonElement.disabled = false;
+    submitButtonElement.innerHTML = "Опубликовать";
+}
 
 const setUploadFormSubmit = (onSuccess, onFail) => {
-
+    uploadFormElement.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+        const formData = new FormData(evt.target);
+        blockSubmitButton();
+        setTimeout(() => {
+            unblockSubmitButton();
+            onSuccess();
+        }, 1000);
+    });
 }
 
 export {setUploadFormSubmit};

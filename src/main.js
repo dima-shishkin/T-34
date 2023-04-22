@@ -9,8 +9,8 @@ renderPicturesList(generatePictures());
 setCommentFormSubmit();
 
 setUploadFormSubmit(
-    function () {},
     function () {
         closeUploadModal();
     },
+    function () {},
 );

@@ -16,7 +16,7 @@ const unblockSubmitButton = () => {
 }
 
 commentInputElement.addEventListener('input', (evt) => {
-    if (evt.target.value) {
+    if (evt.target.value !== '') {
         submitButtonElement.disabled = false;
     } else {
         submitButtonElement.disabled = true;
@@ -26,7 +26,7 @@ commentInputElement.addEventListener('input', (evt) => {
 const setCommentFormSubmit = () => {
     commentFormElement.addEventListener('submit', (evt) => {
         evt.preventDefault();
-        const formData = new FormData(commentFormElement);
+        const formData = new FormData(evt.target);
         blockSubmitButton();
         setTimeout(() => {
             // sendData("http://localhost:80/comments", formData);
