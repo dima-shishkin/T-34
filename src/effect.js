@@ -62,6 +62,17 @@ const onSliderUpdate = (_, handle, unencoded) => {
         }
         i++;
     }
+    // if (effect === "chrome") {
+    //     previewImgElement.style.filter = `grayscale(${unencoded[handle]})`;
+    // } else if (effect === "sepia") {
+    //     previewImgElement.style.filter = `sepia(${unencoded[handle]})`;
+    // } else if (effect === "marvin") {
+    //     previewImgElement.style.filter = `invert(${unencoded[handle]}%)`;
+    // } else if (effect === "phobos") {
+    //     previewImgElement.style.filter = `blur(${unencoded[handle]}px)`;
+    // } else if (effect === "heat") {
+    //     previewImgElement.style.filter = `brightness(${unencoded[handle]})`;
+    // }
 };
 
 const onEffectsRadioChange = (evt) => {
