@@ -1,9 +1,8 @@
-const effects = document.querySelector(".effects__list");
-const uploadFormEffectsElement = document.querySelector(".img-upload__preview img");
-const uploadEffect = document.querySelector(".effect-level__slider");
-const uploadEffectWrapper = document.querySelector(".img-upload__effect-level");
+const previewImgElement = document.querySelector(".img-upload__preview img");
+const effectSliderElement = document.querySelector(".effect-level__slider");
+const sliderWrapperElement = document.querySelector(".img-upload__effect-level");
 
-noUiSlider.create(uploadEffect, {
+noUiSlider.create(effectSliderElement, {
     range: {
         "min": 0,
         "max": 1
@@ -24,72 +23,97 @@ noUiSlider.create(uploadEffect, {
     }
 });
 
-const onSliderUpdate = (_, handle, unencoded) => {
-   const effect = document.querySelector('.effects__radio:checked').id.split('-')[1];
+const EFFECTS = [
+    {
+        name: 'chrome',
+        filter: 'grayscale',
+        unit: null,
+    },
+    {
+        name: 'sepia',
+        filter: 'sepia',
+        unit: null,
+    },    
+    {
+        name: 'marvin',
+        filter: 'invert',
+        unit: '%',
+    },    
+    {
+        name: 'phobos',
+        filter: 'blur',
+        unit: 'px',
+    },    
+    {
+        name: 'heat',
+        filter: 'brightness',
+        unit: null,
+    },    
+];
 
-   if (effect === "chrome") {
-       uploadFormEffectsElement.style.filter = `grayscale(${unencoded[handle]})`;
-   } else if (effect === "sepia") {
-       uploadFormEffectsElement.style.filter = `sepia(${unencoded[handle]})`;
-   }else if (effect === "marvin") {
-       uploadFormEffectsElement.style.filter = `invert(${unencoded[handle]}%)`;
-   }else if (effect === "phobos") {
-       uploadFormEffectsElement.style.filter = `blur(${unencoded[handle]}px)`;
-   }else if (effect === "heat") {
-       uploadFormEffectsElement.style.filter = `brightness(${unencoded[handle]})`;
-   }
+const onSliderUpdate = (_, handle, unencoded) => {
+    const effect = document.querySelector('.effects__radio:checked').id.split('-')[1];
+
+    let i = 0;
+    while (i < EFFECTS.length) {
+        const effectItem = (EFFECTS[i]);
+        if (effect === effectItem.name) {
+            previewImgElement.style.filter = `${effectItem.filter}(${unencoded[handle]}${effectItem.unit ?? ''})`;
+        }
+        i++;
+    }
 };
 
 const onEffectsRadioChange = (evt) => {
     if (evt.target.matches(".effects__radio")) {
-       uploadFormEffectsElement.className = `effects__preview--${evt.target.value}`;
+        previewImgElement.className = `effects__preview--${evt.target.value}`;
 
        if (evt.target.value === "none") {
-           uploadFormEffectsElement.style.filter = 'unset';
-           uploadEffectWrapper.classList.add('hidden');
+        previewImgElement.style.filter = 'unset';
+            sliderWrapperElement.classList.add('hidden');
 
        } else if (evt.target.value === "chrome") {
-           uploadEffect.noUiSlider.updateOptions({
+            effectSliderElement.noUiSlider.updateOptions({
                range: {min: 0, max: 1},
                step: 0.1
            });
-           uploadEffect.noUiSlider.set(1);
-           uploadEffectWrapper.classList.remove('hidden');
+           effectSliderElement.noUiSlider.set(1);
+           sliderWrapperElement.classList.remove('hidden');
 
        } else if (evt.target.value === "sepia") {
-           uploadEffect.noUiSlider.updateOptions({
+            effectSliderElement.noUiSlider.updateOptions({
                range: {min: 0, max: 1},
                step: 0.1
            });
-           uploadEffect.noUiSlider.set(1);
-           uploadEffectWrapper.classList.remove('hidden');
+           effectSliderElement.noUiSlider.set(1);
+           sliderWrapperElement.classList.remove('hidden');
 
        } else if (evt.target.value === "marvin") {
-           uploadEffect.noUiSlider.updateOptions({
+            effectSliderElement.noUiSlider.updateOptions({
                range: {min: 0, max: 100},
                step: 1
            });
-           uploadEffect.noUiSlider.set(100);
-           uploadEffectWrapper.classList.remove('hidden');
+           effectSliderElement.noUiSlider.set(100);
+           sliderWrapperElement.classList.remove('hidden');
 
        } else if (evt.target.value === "phobos") {
-           uploadEffect.noUiSlider.updateOptions({
+            effectSliderElement.noUiSlider.updateOptions({
                range: {min: 0, max: 3},
                step: 0.1
            });
-           uploadEffect.noUiSlider.set(3);
-           uploadEffectWrapper.classList.remove('hidden');
+           effectSliderElement.noUiSlider.set(3);
+           sliderWrapperElement.classList.remove('hidden');
 
        } else if (evt.target.value === "heat") {
-           uploadEffect.noUiSlider.updateOptions({
+            effectSliderElement.noUiSlider.updateOptions({
                range: {min: 1, max: 3},
                step: 0.1
            });
-           uploadEffect.noUiSlider.set(3);
-           uploadEffectWrapper.classList.remove('hidden');
+           effectSliderElement.noUiSlider.set(3);
+           sliderWrapperElement.classList.remove('hidden');
 
        } else {
-           uploadEffectWrapper.classList.remove('hidden');
+        sliderWrapperElement.classList.remove('hidden');
        }
    }
 };
