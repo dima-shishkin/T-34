@@ -28,26 +28,36 @@ const EFFECTS = [
         name: 'chrome',
         filter: 'grayscale',
         unit: null,
+        range: {min: 0, max: 1},
+        step: 0.1
     },
     {
         name: 'sepia',
         filter: 'sepia',
         unit: null,
+        range: {min: 0, max: 1},
+        step: 0.1
     },    
     {
         name: 'marvin',
         filter: 'invert',
         unit: '%',
+        range: {min: 0, max: 100},
+        step: 1
     },    
     {
         name: 'phobos',
         filter: 'blur',
         unit: 'px',
+        range: {min: 0, max: 3},
+        step: 0.1
     },    
     {
         name: 'heat',
         filter: 'brightness',
         unit: null,
+        range: {min: 1, max: 3},
+        step: 0.1
     },    
 ];
 
@@ -56,77 +66,38 @@ const onSliderUpdate = (_, handle, unencoded) => {
 
     let i = 0;
     while (i < EFFECTS.length) {
-        const effectItem = (EFFECTS[i]);
+        const effectItem = EFFECTS[i];
         if (effect === effectItem.name) {
             previewImgElement.style.filter = `${effectItem.filter}(${unencoded[handle]}${effectItem.unit ?? ''})`;
         }
         i++;
     }
-    // if (effect === "chrome") {
-    //     previewImgElement.style.filter = `grayscale(${unencoded[handle]})`;
-    // } else if (effect === "sepia") {
-    //     previewImgElement.style.filter = `sepia(${unencoded[handle]})`;
-    // } else if (effect === "marvin") {
-    //     previewImgElement.style.filter = `invert(${unencoded[handle]}%)`;
-    // } else if (effect === "phobos") {
-    //     previewImgElement.style.filter = `blur(${unencoded[handle]}px)`;
-    // } else if (effect === "heat") {
-    //     previewImgElement.style.filter = `brightness(${unencoded[handle]})`;
-    // }
 };
 
 const onEffectsRadioChange = (evt) => {
     if (evt.target.matches(".effects__radio")) {
         previewImgElement.className = `effects__preview--${evt.target.value}`;
 
-       if (evt.target.value === "none") {
-        previewImgElement.style.filter = 'unset';
+        if (evt.target.value === "none") {
+            previewImgElement.style.filter = 'unset';
             sliderWrapperElement.classList.add('hidden');
+            return;
+        }
 
-       } else if (evt.target.value === "chrome") {
-            effectSliderElement.noUiSlider.updateOptions({
-               range: {min: 0, max: 1},
-               step: 0.1
-           });
-           effectSliderElement.noUiSlider.set(1);
-           sliderWrapperElement.classList.remove('hidden');
-
-       } else if (evt.target.value === "sepia") {
-            effectSliderElement.noUiSlider.updateOptions({
-               range: {min: 0, max: 1},
-               step: 0.1
-           });
-           effectSliderElement.noUiSlider.set(1);
-           sliderWrapperElement.classList.remove('hidden');
-
-       } else if (evt.target.value === "marvin") {
-            effectSliderElement.noUiSlider.updateOptions({
-               range: {min: 0, max: 100},
-               step: 1
-           });
-           effectSliderElement.noUiSlider.set(100);
-           sliderWrapperElement.classList.remove('hidden');
-
-       } else if (evt.target.value === "phobos") {
-            effectSliderElement.noUiSlider.updateOptions({
-               range: {min: 0, max: 3},
-               step: 0.1
-           });
-           effectSliderElement.noUiSlider.set(3);
-           sliderWrapperElement.classList.remove('hidden');
-
-       } else if (evt.target.value === "heat") {
-            effectSliderElement.noUiSlider.updateOptions({
-               range: {min: 1, max: 3},
-               step: 0.1
-           });
-           effectSliderElement.noUiSlider.set(3);
-           sliderWrapperElement.classList.remove('hidden');
-
-       } else {
-        sliderWrapperElement.classList.remove('hidden');
-       }
-   }
+        let i = 0;
+        while (i < EFFECTS.length) {
+            const effectItem = EFFECTS[i];
+            if (evt.target.value === effectItem.name) {
+                effectSliderElement.noUiSlider.updateOptions({
+                    range: {min: effectItem.range.min, max: effectItem.range.max},
+                    step: effectItem.step
+                });
+                effectSliderElement.noUiSlider.set(effectItem.range.max);
+                sliderWrapperElement.classList.remove('hidden');
+            }
+            i++;
+        }
+    }
 };
 
 export {onSliderUpdate, onEffectsRadioChange};
