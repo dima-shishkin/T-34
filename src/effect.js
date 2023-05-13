@@ -83,10 +83,8 @@ const onEffectsRadioChange = (evt) => {
             sliderWrapperElement.classList.add('hidden');
             return;
         }
-
-        let i = 0;
-        while (i < EFFECTS.length) {
-            const effectItem = EFFECTS[i];
+        
+        for (const effectItem of EFFECTS) {
             if (evt.target.value === effectItem.name) {
                 effectSliderElement.noUiSlider.updateOptions({
                     range: {min: effectItem.range.min, max: effectItem.range.max},
@@ -95,7 +93,6 @@ const onEffectsRadioChange = (evt) => {
                 effectSliderElement.noUiSlider.set(effectItem.range.max);
                 sliderWrapperElement.classList.remove('hidden');
             }
-            i++;
         }
     }
 };
